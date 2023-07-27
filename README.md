@@ -21,17 +21,16 @@ The `generated shared library` will be stored in the `build` folder. You will ha
 
 To test the function, you can choose one of these different commands to compile the test function:
 
-`1.`
 ```
 python3 tests/test_main.py
 ```
 
-`2.`
+or
 ```
 python3 -m unittest tests/test_main.py
 ```
 
-`3.`
+or
 ```
 python -m unittest discover
 ```
