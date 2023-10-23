@@ -25,9 +25,9 @@ import (
 func GenerateDataRedundancy(segmentSize int, dataBlocks int, parityBlocks int, length C.int, data *C.char, isSerial *C.char) *C.char {
 	initial_bytes := C.GoBytes(unsafe.Pointer(data), length)
 	reader := bytes.NewReader(initial_bytes)
-	serial := false
-	if C.GoString(isSerial) == "true" {
-		serial = true
+	serial := true
+	if C.GoString(isSerial) == "false" {
+		serial = false
 	}
 	pieceHashRoots, _, _, err := lib.ComputeIntegrityHash(reader, int64(segmentSize), dataBlocks, parityBlocks, serial)
 	if err != nil {

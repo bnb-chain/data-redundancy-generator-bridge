@@ -20,7 +20,7 @@ class TestMainMethod(unittest.TestCase):
         self.segment_size = 16384
         self.data_shards = 4
         self.parity_shards = 2
-        self.serial = "false"
+        self.serial = "true"
         self.data_rendundancy_fct = ctypes.cdll.LoadLibrary(
             getDirPath()
         ).GenerateDataRedundancy
