@@ -20,17 +20,20 @@ class TestMainMethod(unittest.TestCase):
         self.segment_size = 16384
         self.data_shards = 4
         self.parity_shards = 2
+        self.serial = "false"
         self.data_rendundancy_fct = ctypes.cdll.LoadLibrary(
             getDirPath()
         ).GenerateDataRedundancy
 
     def test_generate_data_redundancy(self):
         c_data = ctypes.c_char_p(self.data)
+        c_serial = ctypes.c_char_p(self.serial.encode('utf-8'))
         self.data_rendundancy_fct.argtypes = [
             ctypes.c_int,
             ctypes.c_int,
             ctypes.c_int,
             ctypes.c_int,
+            ctypes.c_char_p,
             ctypes.c_char_p,
         ]
         self.data_rendundancy_fct.restype = ctypes.c_void_p
@@ -42,6 +45,7 @@ class TestMainMethod(unittest.TestCase):
                     self.parity_shards,
                     len(self.data),
                     c_data,
+                    c_serial,
                 ),
                 224,
             ),
