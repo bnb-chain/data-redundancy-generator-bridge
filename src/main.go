@@ -22,10 +22,14 @@ import (
 // [greenfield]: https://github.com/bnb-chain/greenfield-whitepaper/blob/main/part3.md#182-erasure-code-and-data-redundancy
 
 //export GenerateDataRedundancy
-func GenerateDataRedundancy(segmentSize int, dataBlocks int, parityBlocks int, length C.int, data *C.char) *C.char {
+func GenerateDataRedundancy(segmentSize int, dataBlocks int, parityBlocks int, length C.int, data *C.char, isSerial *C.char) *C.char {
 	initial_bytes := C.GoBytes(unsafe.Pointer(data), length)
 	reader := bytes.NewReader(initial_bytes)
-	pieceHashRoots, _, err := lib.ComputeIntegrityHash(reader, int64(segmentSize), dataBlocks, parityBlocks)
+	serial := true
+	if C.GoString(isSerial) == "false" {
+		serial = false
+	}
+	pieceHashRoots, _, _, err := lib.ComputeIntegrityHash(reader, int64(segmentSize), dataBlocks, parityBlocks, serial)
 	if err != nil {
 		errMsg := C.CString(err.Error())
 		return errMsg
