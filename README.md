@@ -1,6 +1,6 @@
 # Data Redundancy Generator Bridge
 
-This repository contains the file that produce the bridge between the [`greenfield-python-sdk`](https://github.com/BitDJ/greenfield-python-sdk) and the greenfield data redundancy go library.
+This repository contains the file that produce the bridge between the [`greenfield-python-sdk`](https://github.com/bnb-chain/greenfield-python-sdk) and the greenfield data redundancy go library.
 
 ## Generate files
 
